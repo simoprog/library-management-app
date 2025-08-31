@@ -9,7 +9,19 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="MediatR" Version="13.0.0" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.8"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="API\" />
+      <Folder Include="Application\" />
+      <Folder Include="Domain\Entities\" />
+      <Folder Include="Domain\Enums\" />
+      <Folder Include="Domain\Repositories\" />
+      <Folder Include="Domain\Services\" />
+      <Folder Include="Domain\ValueObjects\" />
+      <Folder Include="Infrastructure\" />
     </ItemGroup>
 
 </Project>
