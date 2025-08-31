@@ -16,11 +16,8 @@
     <ItemGroup>
       <Folder Include="API\" />
       <Folder Include="Application\" />
-      <Folder Include="Domain\Entities\" />
-      <Folder Include="Domain\Enums\" />
       <Folder Include="Domain\Repositories\" />
       <Folder Include="Domain\Services\" />
-      <Folder Include="Domain\ValueObjects\" />
       <Folder Include="Infrastructure\" />
     </ItemGroup>
 
