@@ -1,4 +1,4 @@
-﻿namespace library_management_api.Infrastructure.Persistence;
+﻿namespace LibraryManagement.Infrastructure.Persistence;
 
 public interface IUnitOfWork : IDisposable
 {

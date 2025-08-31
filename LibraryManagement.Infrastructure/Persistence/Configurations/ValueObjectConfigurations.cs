@@ -1,8 +1,8 @@
-﻿using library_management_api.Domain.ValueObjects;
+﻿using LibraryManagement.Domain.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace library_management_api.Infrastructure.Persistence.Configurations;
+namespace LibraryManagement.Infrastructure.Persistence.Configurations;
 
 public static class ValueObjectConfigurations
 {

@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore.Storage;
 
-namespace library_management_api.Infrastructure.Persistence;
+namespace LibraryManagement.Infrastructure.Persistence;
 
 public class UnitOfWork : IUnitOfWork
 {

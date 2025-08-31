@@ -1,9 +1,9 @@
-﻿using library_management_api.Domain.Entities;
-using library_management_api.Domain.ValueObjects;
+﻿using LibraryManagement.Domain.Entities;
+using LibraryManagement.Domain.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace library_management_api.Infrastructure.Persistence.Configurations;
+namespace LibraryManagement.Infrastructure.Persistence.Configurations;
 
 public class BookConfiguration : IEntityTypeConfiguration<Book>
 {

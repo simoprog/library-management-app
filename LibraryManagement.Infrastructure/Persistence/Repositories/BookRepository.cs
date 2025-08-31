@@ -1,10 +1,11 @@
-﻿using library_management_api.Domain.Entities;
-using library_management_api.Domain.Enums;
-using library_management_api.Domain.Repositories;
-using library_management_api.Domain.ValueObjects;
+﻿using LibraryManagement.Domain.Entities;
+using LibraryManagement.Domain.Enums;
+using LibraryManagement.Domain.Repositories;
+using LibraryManagement.Domain.ValueObjects;
+using LibraryManagementInfrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 
-namespace library_management_api.Infrastructure.Persistence.Repositories;
+namespace LibraryManagement.Infrastructure.Persistence.Repositories;
 
 public class BookRepository : IBookRepository
 {
