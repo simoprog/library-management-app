@@ -1,0 +1,38 @@
+﻿services:
+  
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: library-management-db
+    ports:
+      - "1433:1433"
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Password123
+      - MSSQL_PID=Express
+    volumes:
+      - sqlserver_data:/var/opt/mssql
+    networks:
+      - library-network
+
+  library-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: library-management-api
+    ports:
+      - "5000:8080"
+      - "5001:8081"
+    depends_on:
+      - sqlserver
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Server=sqlserver,1433;Database=LibraryManagementDB;User=sa;Password=YourStrong@Password123;TrustServerCertificate=true;
+    networks:
+      - library-network
+
+volumes:
+  sqlserver_data:
+
+networks:
+  library-network:
+    driver: bridge
