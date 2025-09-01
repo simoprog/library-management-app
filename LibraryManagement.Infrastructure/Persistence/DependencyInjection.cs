@@ -1,5 +1,4 @@
-﻿using library_management_api.Infrastructure.Persistence;
-using LibraryManagement.Domain.Repositories;
+﻿using LibraryManagement.Domain.Repositories;
 using LibraryManagement.Infrastructure.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;

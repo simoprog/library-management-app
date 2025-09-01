@@ -2,7 +2,6 @@
 using LibraryManagement.Domain.Enums;
 using LibraryManagement.Domain.Repositories;
 using LibraryManagement.Domain.ValueObjects;
-using LibraryManagementInfrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 
 namespace LibraryManagement.Infrastructure.Persistence.Repositories;
