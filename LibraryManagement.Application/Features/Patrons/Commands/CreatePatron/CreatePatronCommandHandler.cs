@@ -1,11 +1,12 @@
 using LibraryManagement.Application.Common;
 using LibraryManagement.Application.DTOs;
+using LibraryManagement.Application.Features.Patrons.Commands.CreatePatron;
 using LibraryManagement.Domain.Entities;
 using LibraryManagement.Domain.Enums;
 using LibraryManagement.Domain.Repositories;
 using MediatR;
 
-namespace LibraryManagement.Application.Features.Patrons.Commands;
+namespace LibraryManagement.Application.Features.Patrons.Commands.CreatePatron;
 
 public class CreatePatronCommandHandler : IRequestHandler<CreatePatronCommand, Result<PatronDto>>
 {
