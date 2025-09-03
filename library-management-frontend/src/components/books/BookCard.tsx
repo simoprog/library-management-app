@@ -75,7 +75,7 @@ export const BookCard = ({ book, onDelete }: BookCardProps) => {
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
                 <DropdownMenuItem asChild>
-                  <Link to={`/books/${book.bookId}/edit`}>
+                  <Link to={`/books/edit/${book.bookId}`}>
                     <Edit className="mr-2 h-4 w-4" />
                     Edit
                   </Link>
