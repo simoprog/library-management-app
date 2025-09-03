@@ -10,14 +10,19 @@ export interface PatronDto {
   createdAt: string;
 }
 
+export enum PatronType {
+  Regular = "Regular",
+  Researcher = "Researcher",
+}
+
 export interface CreatePatronDto {
   name: string;
   email: string;
-  type: "Regular" | "Researcher";
+  type: PatronType;
 }
 
 export interface UpdatePatronDto {
   name: string;
   email: string;
-  type: "Regular" | "Researcher";
+  type: PatronType;
 }
