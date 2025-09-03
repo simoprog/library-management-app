@@ -1,7 +1,9 @@
 using LibraryManagement.Application.DTOs;
 using LibraryManagement.Application.Features.Books.Commands.CheckoutBook;
 using LibraryManagement.Application.Features.Books.Commands.CreateBook;
+using LibraryManagement.Application.Features.Books.Commands.DeleteBook;
 using LibraryManagement.Application.Features.Books.Commands.PlaceBookOnHold;
+using LibraryManagement.Application.Features.Books.Commands.UpdateBook;
 using LibraryManagement.Application.Features.Books.Queries;
 using LibraryManagement.Application.Features.Books.Queries.GetBookById;
 using Microsoft.AspNetCore.Mvc;
@@ -54,7 +56,44 @@ public class BooksController : BaseApiController
             
         return HandleResult(result);
     }
+    /// <summary>
+    /// Update an existing book
+    /// </summary>
+    [HttpPut("{id:guid}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult<BookDto>> UpdateBook(Guid id, [FromBody] UpdateBookDto updateBookDto)
+    {
+        var command = new UpdateBookCommand(
+            id,
+            updateBookDto.Title,
+            updateBookDto.Author,
+            updateBookDto.ISBN,
+            updateBookDto.IsRestrictedAccess);
 
+        var result = await Mediator.Send(command);
+        return HandleResult(result);
+    }
+    
+    /// <summary>
+    /// Delete a book
+    /// </summary>
+    [HttpDelete("{id:guid}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult> DeleteBook(Guid id)
+    {
+        var command = new DeleteBookCommand(id);
+        var result = await Mediator.Send(command);
+    
+        if (result.IsSuccess)
+            return NoContent();
+        
+        return HandleResult(result);
+    }
+    
     /// <summary>
     /// Place a book on hold
     /// </summary>

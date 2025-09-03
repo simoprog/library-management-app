@@ -1,5 +1,7 @@
 using LibraryManagement.Application.DTOs;
 using LibraryManagement.Application.Features.Patrons.Commands.CreatePatron;
+using LibraryManagement.Application.Features.Patrons.Commands.DeletePatron;
+using LibraryManagement.Application.Features.Patrons.Commands.UpdatePatron;
 using LibraryManagement.Application.Features.Patrons.Queries.GetAllPatrons;
 using LibraryManagement.Application.Features.Patrons.Queries.GetPatronById;
 using LibraryManagement.Application.Features.Patrons.Queries.GetPatronHolds;
@@ -51,6 +53,43 @@ public class PatronsController : BaseApiController
     public async Task<ActionResult<PatronDto>> GetPatronById(Guid id)
     {
         var result = await Mediator.Send(new GetPatronByIdQuery(id));
+        return HandleResult(result);
+    }
+    
+    /// <summary>
+    /// Update an existing patron
+    /// </summary>
+    [HttpPut("{id:guid}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult<PatronDto>> UpdatePatron(Guid id, [FromBody] UpdatePatronDto updatePatronDto)
+    {
+        var command = new UpdatePatronCommand(
+            id,
+            updatePatronDto.Name,
+            updatePatronDto.Email,
+            updatePatronDto.Type);
+
+        var result = await Mediator.Send(command);
+        return HandleResult(result);
+    }
+
+    /// <summary>
+    /// Delete/Deactivate a patron
+    /// </summary>
+    [HttpDelete("{id:guid}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult> DeletePatron(Guid id)
+    {
+        var command = new DeletePatronCommand(id);
+        var result = await Mediator.Send(command);
+    
+        if (result.IsSuccess)
+            return NoContent();
+        
         return HandleResult(result);
     }
 
