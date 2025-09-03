@@ -27,10 +27,9 @@ public class BookRepository : IBookRepository
             .FirstOrDefaultAsync(b => b.ISBN == isbn, cancellationToken);
     }
     
-    public async Task<IReadOnlyList<Book>> GetAvailableBooksAsync(CancellationToken cancellationToken = default)
+    public async Task<IReadOnlyList<Book>> GetBooksAsync(CancellationToken cancellationToken = default)
     {
         return await _context.Books
-            .Where(b => b.Status == BookStatus.Available)
             .OrderBy(b => b.Title)
             .ToListAsync(cancellationToken);
     }

@@ -16,7 +16,7 @@ public class GetAllBooksQueryHandler : IRequestHandler<GetAllBooksQuery, Result<
 
     public async Task<Result<List<BookDto>>> Handle(GetAllBooksQuery request, CancellationToken cancellationToken)
     {
-        var books = await _bookRepository.GetAvailableBooksAsync(cancellationToken);
+        var books = await _bookRepository.GetBooksAsync(cancellationToken);
         
         var bookDtos = books.Select(book => new BookDto(
             book.Id,

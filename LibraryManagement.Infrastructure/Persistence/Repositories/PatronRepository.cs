@@ -26,10 +26,9 @@ public class PatronRepository : IPatronRepository
             .FirstOrDefaultAsync(p => p.Email == email, cancellationToken);
     }
     
-    public async Task<IReadOnlyList<Patron>> GetActivePatronsAsync(CancellationToken cancellationToken = default)
+    public async Task<IReadOnlyList<Patron>> GetPatronsAsync(CancellationToken cancellationToken = default)
     {
         return await _context.Patrons
-            .Where(p => p.IsActive)
             .OrderBy(p => p.Name)
             .ToListAsync(cancellationToken);
     }

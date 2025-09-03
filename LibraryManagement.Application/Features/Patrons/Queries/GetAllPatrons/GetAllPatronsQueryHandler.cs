@@ -16,7 +16,7 @@ public class GetAllPatronsQueryHandler : IRequestHandler<GetAllPatronsQuery, Res
 
     public async Task<Result<List<PatronDto>>> Handle(GetAllPatronsQuery request, CancellationToken cancellationToken)
     {
-        var patrons = await _patronRepository.GetActivePatronsAsync(cancellationToken);
+        var patrons = await _patronRepository.GetPatronsAsync(cancellationToken);
         
         var patronDtos = patrons.Select(patron => new PatronDto(
             patron.Id,
