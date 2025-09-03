@@ -45,9 +45,9 @@ export const EditPatronPage = () => {
   const form = useForm<UpdatePatronFormData>({
     resolver: zodResolver(updatePatronSchema),
     defaultValues: {
-      name: "",
-      email: "",
-      type: undefined,
+      name: patron?.name || "",
+      email: patron?.email || "",
+      type: patron?.type as PatronType,
     },
   });
 
@@ -57,7 +57,7 @@ export const EditPatronPage = () => {
       form.reset({
         name: patron.name,
         email: patron.email,
-        type: patron.type,
+        type: patron.type as PatronType,
       });
     }
   }, [patron, form]);
@@ -79,18 +79,12 @@ export const EditPatronPage = () => {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center space-x-4">
-        <Link to="/patrons">
-          <Button variant="outline" size="sm">
-            <ArrowLeft className="h-4 w-4 mr-2" />
-            Back to Patrons
-          </Button>
-        </Link>
+      <div className="flex flex-col items-center justify-center space-y-4">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Edit Patron</h1>
-          <p className="text-gray-600 mt-2">
-            Update patron information
-          </p>
+          <h1 className="text-3xl text-center font-bold text-gray-900">
+            Edit Patron
+          </h1>
+          <p className="text-gray-600 mt-2">Update patron information</p>
         </div>
       </div>
 
@@ -110,7 +104,10 @@ export const EditPatronPage = () => {
                 {patron.isActive ? (
                   <>
                     <UserCheck className="h-4 w-4 text-green-600" />
-                    <Badge variant="default" className="text-xs bg-green-100 text-green-800">
+                    <Badge
+                      variant="default"
+                      className="text-xs bg-green-100 text-green-800"
+                    >
                       Active
                     </Badge>
                   </>
@@ -133,7 +130,9 @@ export const EditPatronPage = () => {
               <div className="flex justify-between text-sm">
                 <span className="text-gray-600">Type:</span>
                 <Badge
-                  variant={patron.type === "Researcher" ? "default" : "secondary"}
+                  variant={
+                    patron.type === "Researcher" ? "default" : "secondary"
+                  }
                   className="text-xs"
                 >
                   {patron.type}
@@ -148,7 +147,8 @@ export const EditPatronPage = () => {
                       : "text-green-600"
                   }`}
                 >
-                  {patron.outstandingFeesCurrency} {patron.outstandingFeesAmount.toFixed(2)}
+                  {patron.outstandingFeesCurrency}{" "}
+                  {patron.outstandingFeesAmount.toFixed(2)}
                 </span>
               </div>
               <div className="flex justify-between text-sm">
@@ -174,7 +174,10 @@ export const EditPatronPage = () => {
           </CardHeader>
           <CardContent>
             <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="space-y-6"
+              >
                 <FormField
                   control={form.control}
                   name="name"

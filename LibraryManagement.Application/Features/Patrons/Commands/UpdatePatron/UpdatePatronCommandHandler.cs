@@ -41,7 +41,11 @@ public class UpdatePatronCommandHandler : IRequestHandler<UpdatePatronCommand, R
 
         try
         {
-            
+            patron.UpdateDetails(
+                request.Name,
+                request.Email,
+                patronType
+            );
             await _patronRepository.UpdateAsync(patron, cancellationToken);
             await _unitOfWork.SaveChangesAsync(cancellationToken);
 

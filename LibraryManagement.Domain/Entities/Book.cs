@@ -29,7 +29,15 @@ public class Book : EntityBase
         Status = BookStatus.Available;
         IsRestrictedAccess = isRestrictedAccess;
     }
-    
+    public void UpdateDetails(string title, string author, string isbn, bool isRestrictedAccess)
+    {
+        Title = title;
+        Author = author;
+        ISBN = isbn;
+        IsRestrictedAccess = isRestrictedAccess;
+        
+        UpdateTimestamp(); 
+    }
     public void PlaceOnHold(PatronId patronId, HoldDuration duration)
     {
         if (Status != BookStatus.Available)

@@ -31,8 +31,16 @@ public class UpdateBookCommandHandler : IRequestHandler<UpdateBookCommand, Resul
         {
             return Result<BookDto>.Failure("Another book with this ISBN already exists");
         }
+        
         try
         {
+            book.UpdateDetails(
+                request.Title,
+                request.Author,
+                request.ISBN,
+                request.IsRestrictedAccess
+            );
+
             await _bookRepository.UpdateAsync(book, cancellationToken);
             await _unitOfWork.SaveChangesAsync(cancellationToken);
 

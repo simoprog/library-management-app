@@ -29,6 +29,16 @@ public class Patron : EntityBase
     
     public bool HasOutstandingFees() => OutstandingFees.Amount > 0;
     
+    public void UpdateDetails(string name, string email, PatronType type)
+    {
+        
+        Name = name;
+        Email = email;
+        Type = type;
+        
+        UpdateTimestamp(); 
+    }
+    
     public void AddFee(Money fee)
     {
         OutstandingFees += fee;
