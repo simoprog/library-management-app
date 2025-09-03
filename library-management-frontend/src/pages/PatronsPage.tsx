@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { usePatrons } from "@/hooks/usePatrons";
+import { usePatrons, useDeletePatron } from "@/hooks/usePatrons";
 import { Input } from "@/components/ui/input";
 import {
   Card,
@@ -25,6 +25,7 @@ import {
   DollarSign,
   UserCheck,
   UserX,
+  Trash2,
 } from "lucide-react";
 import { ErrorMessage } from "@/components/common/ErrorMessage";
 import { LoadingSpinner } from "@/components/common/LoadingSpinner";
@@ -33,6 +34,7 @@ import { Link } from "react-router-dom";
 
 export const PatronsPage = () => {
   const { data: patrons, isLoading, error } = usePatrons();
+  const deletePatronMutation = useDeletePatron();
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState<string>("all");
   const [typeFilter, setTypeFilter] = useState<string>("all");
@@ -57,6 +59,16 @@ export const PatronsPage = () => {
 
     return matchesSearch && matchesStatus && matchesType;
   });
+
+  const handleDeletePatron = async (id: string) => {
+    if (
+      window.confirm(
+        "Are you sure you want to delete this patron? This action cannot be undone."
+      )
+    ) {
+      deletePatronMutation.mutate(id);
+    }
+  };
 
   return (
     <div className="space-y-6">
@@ -180,6 +192,15 @@ export const PatronsPage = () => {
                         Edit
                       </Button>
                     </Link>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="flex-1 text-red-600 hover:text-red-700 hover:bg-red-50"
+                      onClick={() => handleDeletePatron(patron.patronId)}
+                    >
+                      <Trash2 className="h-4 w-4 mr-1" />
+                      Delete
+                    </Button>
                   </div>
                 </div>
               </CardContent>

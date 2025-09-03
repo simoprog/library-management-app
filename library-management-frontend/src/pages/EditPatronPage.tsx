@@ -29,8 +29,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Users, ArrowLeft, Mail, UserCheck, UserX } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Users, Mail, UserCheck, UserX } from "lucide-react";
 import { LoadingSpinner } from "@/components/common/LoadingSpinner";
 import { ErrorMessage } from "@/components/common/ErrorMessage";
 import { Badge } from "@/components/ui/badge";
