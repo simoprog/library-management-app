@@ -10,6 +10,12 @@ public class CreateBookCommandHandler : IRequestHandler<CreateBookCommand,Result
 {
     private readonly IBookRepository _bookRepository;
     private readonly IUnitOfWork _unitOfWork;
+
+    public CreateBookCommandHandler(IBookRepository bookRepository, IUnitOfWork unitOfWork)
+    {
+        _bookRepository = bookRepository;
+        _unitOfWork = unitOfWork;
+    }
     public async Task<Result<BookDto>> Handle(CreateBookCommand request, CancellationToken cancellationToken)
     {
         var existingBook = await _bookRepository.GetByISBNAsync(request.ISBN, cancellationToken);
