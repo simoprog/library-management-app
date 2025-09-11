@@ -12,6 +12,7 @@ public class ApplicationDbContext : DbContext
     
     public DbSet<Book> Books => Set<Book>();
     public DbSet<Patron> Patrons => Set<Patron>();
+    public DbSet<BookReview> BookReviews => Set<BookReview>();
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -20,10 +21,13 @@ public class ApplicationDbContext : DbContext
         // Apply configurations
         modelBuilder.ApplyConfiguration(new BookConfiguration());
         modelBuilder.ApplyConfiguration(new PatronConfiguration());
+        modelBuilder.ApplyConfiguration(new BookReviewConfiguration());
         
         // Global query filters
         modelBuilder.Entity<Patron>()
             .HasQueryFilter(p => p.IsActive);
+        
+      
     }
     
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

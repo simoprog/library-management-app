@@ -6,8 +6,7 @@ namespace LibraryManagement.Domain.Entities;
 
 public class BookReview : EntityBase
 {
-    public Guid Id { get; set; }
-    public ReviewId Id { get; set; }
+    public ReviewId ReviewId { get; set; }
     
     [Range(1,5)]
     public int Rating { get; set; }
