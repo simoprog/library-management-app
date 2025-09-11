@@ -14,7 +14,7 @@ namespace LibraryManagement.Application;
         
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(assembly));
         
-            // services.AddValidatorsFromAssembly(assembly);
+             services.AddValidatorsFromAssembly(assembly);
         
             return services;
         }
