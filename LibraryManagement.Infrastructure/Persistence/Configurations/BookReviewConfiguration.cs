@@ -25,8 +25,13 @@ public class BookReviewConfiguration : IEntityTypeConfiguration<BookReview>
         
         builder.Property(br => br.Rating).IsRequired();
         builder.Property(br => br.Description).HasMaxLength(200).IsRequired();
-        builder.HasOne(br => br.Book).WithOne();
-        builder.HasOne(br => br.Patron).WithOne();
+        builder.HasOne(br => br.Book)
+            .WithMany() 
+            .HasForeignKey(br => br.BookId);
+
+        builder.HasOne(br => br.Patron)
+            .WithMany()  
+            .HasForeignKey(br => br.PatronId);
        
 
         

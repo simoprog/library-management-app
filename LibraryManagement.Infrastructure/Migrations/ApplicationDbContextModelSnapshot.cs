@@ -84,6 +84,47 @@ namespace LibraryManagement.Infrastructure.Migrations
                     b.ToTable("Books", (string)null);
                 });
 
+            modelBuilder.Entity("LibraryManagement.Domain.Entities.BookReview", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("BookId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<Guid>("PatronId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Rating")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("ReviewId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BookId");
+
+                    b.HasIndex("PatronId");
+
+                    b.ToTable("BookReviews", null, t =>
+                        {
+                            t.HasCheckConstraint("CK_BOOK-REVIEW_RatingRange", "Rating >=1 AND Rating <=5");
+                        });
+                });
+
             modelBuilder.Entity("LibraryManagement.Domain.Entities.Patron", b =>
                 {
                     b.Property<Guid>("Id")
@@ -124,6 +165,25 @@ namespace LibraryManagement.Infrastructure.Migrations
                         .IsUnique();
 
                     b.ToTable("Patrons", (string)null);
+                });
+
+            modelBuilder.Entity("LibraryManagement.Domain.Entities.BookReview", b =>
+                {
+                    b.HasOne("LibraryManagement.Domain.Entities.Book", "Book")
+                        .WithMany()
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("LibraryManagement.Domain.Entities.Patron", "Patron")
+                        .WithMany()
+                        .HasForeignKey("PatronId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Book");
+
+                    b.Navigation("Patron");
                 });
 
             modelBuilder.Entity("LibraryManagement.Domain.Entities.Patron", b =>
